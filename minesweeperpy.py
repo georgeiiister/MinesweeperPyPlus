@@ -1,6 +1,10 @@
 import tkinter as tk
 import random
 import tkinter.messagebox as mb
+import logging
+
+logging.basicConfig(filename='MinesweeperPy.log', level=logging.DEBUG,format='%(asctime)s - %(levelname)s - %(message)s')
+
 
 size_game_field = 'size_game_field'
 number_of_bombs_coordinates = 'number_of_bombs_coordinates'
@@ -45,6 +49,7 @@ class MFrame(tk.Frame):
         game_field = {(x, y): MButton(master=self, xy=(x, y)) for x in size_game_field_x for y in size_game_field_y}
 
         bombs = random.sample(population=tuple(game_field.keys()), k=get_tuning_item(number_of_bombs_coordinates))
+        logging.debug(f'bombs coordinate {bombs}')
 
         for item in game_field:
             if item in bombs:
@@ -78,6 +83,7 @@ def get_tuning_item(item_code) -> tuple | int | str:
     return get_tuning_dict()[item_code]
 
 
-root = MWin()
-
-root.mainloop()
+if __name__=='__main__':
+    logging.debug(f'start debug')
+    root = MWin()
+    root.mainloop()
