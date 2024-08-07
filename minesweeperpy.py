@@ -114,6 +114,6 @@ def get_tuning_item(item_code) -> tuple | int | str:
 
 
 if __name__ == '__main__':
-    logging.debug(f'start debug')
+    logging.debug(f'start debug MinesweeperPy')
     root = MWin()
     root.mainloop()
