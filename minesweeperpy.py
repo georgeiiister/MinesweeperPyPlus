@@ -31,11 +31,13 @@ class MButton(tk.Button):
         return self.__xy
 
     def check_bomb(self):
+        self.master.set_count_check_bomb()
         if self.bomb:
             mb.showinfo(title=get_tuning_item(title_for_boom), message=get_tuning_item(message_for_boom))
             self.__set_disabled_boom()
         else:
             self.__set_disabled_ok()
+        logging.debug(f'count_check_bomb: {self.master.count_check_bomb}')
 
     def __set_disabled_ok(self):
         self.config(state='disabled', text='ok')
@@ -51,7 +53,7 @@ class MFrame(tk.Frame):
         self.__size_x = None
         self.__size_y = None
 
-    def __set_count_check_bomb(self):
+    def set_count_check_bomb(self):
         self.__count_check_bomb += 1
 
     @property
@@ -79,7 +81,7 @@ class MFrame(tk.Frame):
         game_field = {(x, y): MButton(master=self, xy=(x, y)) for x in range_x for y in range_y}
 
         bombs = random.sample(population=tuple(game_field.keys()), k=get_tuning_item(number_of_bombs_coordinates))
-        logging.debug(f'bombs coordinate {bombs}')
+        logging.debug(f'bombs coordinate: {bombs}')
 
         for item in game_field:
             if item in bombs:
