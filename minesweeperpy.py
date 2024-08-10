@@ -13,22 +13,22 @@ message_for_boom = 'message_for_boom'
 
 
 class MButton(tk.Button):
-    def __init__(self, master, xy, width=None, height=None):
+    def __init__(self, master, xy: tuple, width=None, height=None):
         tk.Button.__init__(self, master=master, command=self.check_bomb, width=width, height=height, text='?')
         self.__xy = xy
         self.__bomb = False
 
     @property
     def bomb(self):
-        return self.__bomb
+        return self.__bomb  # check button on bomb?
 
     @bomb.setter
     def bomb(self, value):
-        self.__bomb = value
+        self.__bomb = value  # set bomb on button
 
     @property
     def xy(self):
-        return self.__xy
+        return self.__xy  # return coordinate button on game field
 
     def check_bomb(self):
         self.master.set_count_check_bomb()
@@ -39,10 +39,10 @@ class MButton(tk.Button):
             self.__set_disabled_ok()
         logging.debug(f'count_check_bomb: {self.master.count_check_bomb}')
 
-    def __set_disabled_ok(self):
+    def __set_disabled_ok(self):  # private method for disabled button with successful check on bomb
         self.config(state='disabled', text='ok')
 
-    def __set_disabled_boom(self):
+    def __set_disabled_boom(self):  # private method for disabled button with boom
         self.config(state='disabled', text=':(')
 
 
@@ -53,7 +53,7 @@ class MFrame(tk.Frame):
         self.__size_x = None
         self.__size_y = None
 
-    def set_count_check_bomb(self):
+    def set_count_check_bomb(self):  # ToDo change this method on private
         self.__count_check_bomb += 1
 
     @property
